@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+message ppd_rdb_req {
+    int32 op = 1;
+    int32 optarg = 2;
+    bytes key = 3;
+    bytes val = 4;
+}
+
+message ppd_rdb_resp {
+    int32 status = 1;
+    bytes result = 2;
+}
+
+message ppd_echo_req {
+    int32 enable_delay = 1;
+}
+
+message ppd_echo_resp {
+    int32 status = 1;
+}
+
+message ppd_touch_req {
+    int32 touch_cnt = 1;
+    int32 inc = 2;
+}
+
+message ppd_touch_resp {
+    int32 status = 1;
+}
+

@@ -1,0 +1,5 @@
+192.168.1.163 - [30/Jan/2019:12:23:22 -0500] "POST /newsup.pl HTTP/1.0" 301 0 "-" "-"
+192.168.1.163 - [30/Jan/2019:12:23:22 -0500] "POST /newsup.cgi HTTP/1.0" 301 0 "-" "-"
+192.168.1.163 - [25/Jan/2019:18:14:05 -0500] "HEAD / HTTP/1.1" 200 0 "-" "Mozilla/6.0 (Windows; U; Windows NT 5.0; en-US; rv:2.3.0.1) Gecko/20080909 Firefox/3.0.1.7"
+192.168.1.163 - [25/Jan/2019:18:14:06 -0500] "GET / HTTP/1.1" 200 5745 "-" "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:x.xx) Gecko/20030504 Mozilla Firebird/0.6"
+

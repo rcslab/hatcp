@@ -1,0 +1,19 @@
+WANACC README
+
+> How to run?
+
+Architecture:
+User APP -> MiddleServer(ms) -> EndServer(es) -> Remote APP
+
+Command:
+User APP: 
+    ./wrkwrk -m wanacc -s ms_ip(A) -p ms_port(B) - wrkwrk_args
+ms:
+    ./wanacc -M ms -S local_listening_ip(A) -p local_listening_port(B) -E es_ip(C) -e es_port(D)
+es:
+    ./wanacc -M es -S local_listening_ip(C) -p local_listening_port(D) -E remote_ip(E) -e remote_port(F)
+Remote APP:
+    ./httpd -s local_listening_ip(E) -p local_listening_port(F) - httpd_args
+
+Note: somig feature could be enabled on ms with designated argument (-m option).
+

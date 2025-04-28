@@ -1,0 +1,36 @@
+cmake_minimum_required(VERSION 3.10.0)
+project(pingpong)
+
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/msg/msg.pb.cc
+                    COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/msg/
+                    COMMAND protoc --cpp_out=${CMAKE_CURRENT_BINARY_DIR}/msg/ --proto_path=${CMAKE_CURRENT_SOURCE_DIR}/msg/ msg.proto
+                    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/msg/msg.proto)
+
+
+find_package(Protobuf REQUIRED)
+#find_package(rocksdb REQUIRED)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${ROCKSDB_INCLUDE_DIR})
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/msg)
+include_directories(${Protobuf_INCLUDE_DIRS})
+
+set(CFLAGS -Wall -Wextra -Werror -Wno-unused-parameter -Wno-unused-variable -std=c++11 -O2 -g)
+set(SOMIG_CFLAGS -Wall -Wextra -Werror -Wno-unused-parameter -Wno-unused-variable -std=c++11 -O2 -g -DSOMIGRATION)
+add_executable(dismember ${CMAKE_CURRENT_SOURCE_DIR}/dismember/dismember.cc
+                                ${CMAKE_CURRENT_SOURCE_DIR}/dismember/Generator.cc
+                                ${CMAKE_CURRENT_SOURCE_DIR}/dismember/reqgen.cc
+                                ${CMAKE_CURRENT_SOURCE_DIR}/dismember/util.cc
+                                ${CMAKE_CURRENT_BINARY_DIR}/msg/msg.pb.cc)
+target_link_libraries(dismember ${Protobuf_LIBRARIES} bz2 z)
+#target_link_libraries(dismember ${Protobuf_LIBRARIES} ${ROCKSDB_LIBRARIES} bz2 z)
+target_compile_options(dismember PRIVATE ${CFLAGS})
+
+add_executable(ppd ${CMAKE_CURRENT_SOURCE_DIR}/ppd/ppd.cc
+                    ${CMAKE_CURRENT_SOURCE_DIR}/ppd/reqproc.cc
+                    ${CMAKE_CURRENT_SOURCE_DIR}/ppd/somig.cc
+                    ${CMAKE_CURRENT_BINARY_DIR}/msg/msg.pb.cc)
+target_link_libraries(ppd ${Protobuf_LIBRARIES} bz2 z)
+target_compile_options(ppd PRIVATE ${CFLAGS})

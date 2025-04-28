@@ -1,0 +1,6 @@
+# Host file for socks
+# Format: orig_address mapped_address
+
+
+172.16.20.220 172.16.21.220
+

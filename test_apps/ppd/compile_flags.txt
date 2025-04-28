@@ -1,0 +1,12 @@
+-Imsg
+-Iinclude
+-I/usr/local/include
+-xc++
+-Wall
+-Wextra
+-Werror
+-Wno-unused-parameter
+-Wno-unused-variable
+-Wno-unused-function
+-std=c++11
+

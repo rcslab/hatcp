@@ -1,0 +1,2 @@
+.\" $FreeBSD$
+Do not install kernel debug symbol files.
